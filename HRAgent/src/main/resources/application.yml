@@ -1,0 +1,82 @@
+spring:
+  http:
+    client:
+      connect-timeout: 60000
+      read-timeout: 60000
+  cloud:
+    nacos:
+      config:
+        serverAddr: localhost:8848
+        file-extension: yaml
+        refresh-enabled: true
+  config:
+    import: nacos:dtpconfig
+  # spring ai alibaba 配置信息
+  ai:
+    memory:
+      redis:
+        host: localhost
+        port: 6379
+    dashscope:
+      api-key: sk-b78904fcf3314bb8bc3e5e6a77710f42
+      chat:
+        options:
+          # 增加读取超时，单位毫秒，建议设为 60 秒
+          read-timeout: 60000
+          # 建立连接超时
+          connect-timeout: 60000
+  mail:
+    host: smtp.163.com
+    username: luyu020816@163.com
+    password: BBb7MT4xzUxDpB4U
+
+
+  # 数据库连接信息
+  datasource:
+    url: jdbc:mysql://localhost:3306/hragent?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+management:
+  metrics:
+    # 指标采集标签名
+    tags:
+      application: hragent
+    # 启用对接prometheus服务采集指标数据
+    prometheus:
+      metrics:
+        export:
+          enabled: true
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include:
+          - '*'
+      cors:
+        # 开放所有域访问
+        allowed-origins:
+          - '*'
+  health:
+    mail:
+      enabled: true
+
+# 配置 MP
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  # MP 打印日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# JWT secret
+jwt:
+  secret: 12345678
+# 设置通义返回编码
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true

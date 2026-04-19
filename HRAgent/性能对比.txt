@@ -1,0 +1,6 @@
+1.响应时延
+dtp+cf                   串行
+1pdf：642ms              528ms
+2pdf：395ms              1.03ms
+4pdf：529ms              1992ms
+2.并发任务
